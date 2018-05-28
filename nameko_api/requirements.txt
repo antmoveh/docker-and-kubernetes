@@ -1,0 +1,11 @@
+nameko
+flasgger
+manage
+yagmail
+dynaconf
+qiniu
+pillow
+Image
+qrcode
+beautifulsoup4
+pyzbar

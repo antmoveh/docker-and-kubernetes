@@ -1,0 +1,12 @@
+nameko
+flasgger
+gunicorn
+configparser
+manage
+yagmail
+dynaconf
+mongopool
+jpush
+elasticsearch>=5.0.0,<6.0.0
+redis
+pymongo==3.4

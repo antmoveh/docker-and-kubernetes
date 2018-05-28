@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nameko_rpc:
+    image: nameko/rpc:latest
+    networks:
+      - default
+      - docker_net
+    volumes:
+      - /data/workspace:/data/workspace
+      - $PWD/run:/data/run
+    container_name: nameko_rpc
+    command: sh "/data/run/run.sh" 
+
+networks:
+ docker_net:
+  external: true

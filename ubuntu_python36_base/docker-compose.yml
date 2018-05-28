@@ -1,0 +1,5 @@
+version: "3"
+services:
+  python36:
+    image: base/ubuntu_python36:latest
+    container_name: python36_test

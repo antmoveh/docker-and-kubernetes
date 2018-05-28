@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nameko_api:
+    image: nameko/api:latest
+    networks:
+      - default
+      - docker_net
+    expose:
+      - 8888
+      - 8889
+    volumes:
+      - /data/workspace:/data/workspace
+      - $PWD/run:/data/run
+    container_name: nameko_api
+    command: sh "/data/run/run.sh" 
+
+
+networks:
+ docker_net:
+  external: true

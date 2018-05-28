@@ -1,0 +1,18 @@
+version: "3"
+services:
+  wx_api:
+    image: wx/flask:latest
+    networks:
+      - default
+      - docker_net
+    expose:
+      - 8888
+    volumes:
+      - /data/app:/data/workspace
+      - $PWD/run:/data/run
+    container_name: wx_api
+    command: sh "/data/run/run.sh"
+
+networks:
+ docker_net:
+  external: true
