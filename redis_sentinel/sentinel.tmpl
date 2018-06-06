@@ -1,0 +1,8 @@
+bind 0.0.0.0
+daemonize yes
+port ${PORT}
+logfile ${PORT}.log
+dir /opt/redis/data/
+
+sentinel monitor mymaster 127.0.0.1 6390 2
+sentinel parallel-syncs mymaster 1

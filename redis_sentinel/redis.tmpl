@@ -1,0 +1,6 @@
+bind 0.0.0.0
+daemonize yes
+port ${PORT}
+logfile ${PORT}.log
+dir /opt/redis/data/
+dbfilename dump-${PORT}.rdb

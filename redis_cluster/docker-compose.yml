@@ -1,0 +1,11 @@
+version: '3'
+services:
+  redis-cluster:
+    image: redis/cluster:latest
+    ports:
+      - '7000-7005:7000-7005'
+    hostname: cluster
+    container_name: redis-cluster
+    environment:
+      IP: 0.0.0.0
+      CLUSTER_ONLY: 'true'

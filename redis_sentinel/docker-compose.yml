@@ -1,0 +1,13 @@
+version: '3'
+services:
+  redis-sentinel:
+    image: redis
+    ports:
+      - '6390-6392:6390-6392'
+      - '26390-26392:26390-26392'
+    hostname: sentinel
+    volumes:
+      - $PWD/redis:/opt/redis
+      - $PWD/run:/data/run
+    container_name: redis-sentinel
+    command: sh "/data/run/run.sh"
