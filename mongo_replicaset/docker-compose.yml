@@ -1,0 +1,27 @@
+primary:
+  hostname: primary
+  image: mongo:3.6.5
+  ports:
+    - 27027:27017
+  volumes:
+    - /opt/mongo/rs1:/data/db
+  container_name: mongo_primary
+  command: mongod --dbpath /data/db --replSet rs --oplogSize 128
+secondary:
+  image: mongo:3.6.5
+  ports:
+    - 27037:27017
+  volumes:
+    - /opt/mongo/rs2:/data/db
+  container_name: mongo_secondary
+  command: mongod --dbpath /data/db --replSet rs --oplogSize 128
+  links:
+    - primary
+arbiter:
+  image: mongo:3.6.5
+  ports:
+    - 27047:27017
+  container_name: mongo_arbiter
+  command: mongod --dbpath /data/db --replSet rs --smallfiles --oplogSize 128
+  links:
+    - primary
