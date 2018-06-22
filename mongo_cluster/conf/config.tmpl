@@ -1,0 +1,28 @@
+
+## content
+systemLog:
+  destination: file
+  logAppend: true
+  path: /md/config/${PORT}/log/config.log
+ 
+# Where and how to store data.
+storage:
+  dbPath: /md/config/${PORT}/db
+  journal:
+    enabled: true
+# how the process runs
+processManagement:
+  fork: true
+  pidFilePath: /md/config/${PORT}/log/configsrv.pid
+ 
+# network interfaces
+net:
+  port: ${PORT}
+  bindIp: 0.0.0.0
+ 
+#operationProfiling:
+replication:
+    replSetName: configs        
+
+sharding:
+    clusterRole: configsvr

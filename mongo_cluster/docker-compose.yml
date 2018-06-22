@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongo-cluster:
+    image: mongo:3.6.5
+    ports:
+      - '28000-28015:28000-28015'
+    volumes:
+      - $PWD/md:/md
+      - $PWD/run:/start
+    hostname: cluster
+    container_name: mongo-cluster
+    command: sh "/start/run.sh" 

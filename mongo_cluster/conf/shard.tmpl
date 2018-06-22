@@ -1,0 +1,33 @@
+
+
+#配置文件内容
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /md/${name}/${PORT}/log/${name}.log
+ 
+# Where and how to store data.
+storage:
+  dbPath: /md/${name}/${PORT}/db
+  journal:
+    enabled: true
+  wiredTiger:
+    engineConfig:
+       cacheSizeGB: 20
+
+# how the process runs
+processManagement:
+  fork: true 
+  pidFilePath: /md/${name}/${PORT}/log/${name}.pid
+ 
+# network interfaces
+net:
+  port: ${PORT}
+  bindIp: 0.0.0.0
+
+#operationProfiling:
+replication:
+    replSetName: ${name}
+sharding:
+    clusterRole: shardsvr

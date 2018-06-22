@@ -1,0 +1,17 @@
+
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: /md/mongos/${PORT}/log/mongos.log
+processManagement:
+  fork: true
+pidFilePath: /md/mongos/${PORT}/log/mongos.pid
+ 
+# network interfaces
+net:
+  port: ${PORT}
+  bindIp: 0.0.0.0
+#监听的配置服务器,只能有1个或者3个 configs为配置服务器的副本集名字
+sharding:
+   configDB: configs/${conf}

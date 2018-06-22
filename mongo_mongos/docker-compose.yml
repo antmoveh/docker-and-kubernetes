@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongo-mongos:
+    image: mongo:3.6.5
+    ports:
+      - '28020-28021:28020-28021'
+    volumes:
+      - $PWD/md:/md
+      - $PWD/run:/start
+    hostname: mongos
+    container_name: mongo-mongos
+    command: sh "/start/run.sh" 

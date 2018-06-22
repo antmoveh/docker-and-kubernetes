@@ -1,0 +1,31 @@
+
+mongo --host ${host} --port ${port0} <<EOF
+
+   var cfg = {
+        "_id": "${id}",
+        "version": 1,
+        "members": [
+            {
+                "_id": 0,
+                "host": "${host}:${port0}",
+              
+            },
+            {
+                "_id": 1,
+                "host": "${host}:${port1}",
+            },
+            {
+                "_id": 2,
+                "host": "${host}:${port2}",
+            }
+        ]
+    };
+    try{
+        var config = rs.config();
+        rs.reconfig(cfg, { force: true });
+    }catch(err){
+        rs.initiate(cfg);
+    }
+EOF
+
+
