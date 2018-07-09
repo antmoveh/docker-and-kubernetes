@@ -1,0 +1,112 @@
+
+
+version: '3'
+
+services:
+  ndbman:
+    container_name: management1
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh ndb_mgmd
+    ports:
+        - "3308:3306"
+    volumes:
+        - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.2
+
+  datanode1:
+    container_name: ndb1
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh ndbd
+    ports:
+            - "13306:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.3
+
+  datanode2:
+    container_name: ndb2
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh ndbd
+    ports:
+            - "13307:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.4
+
+  datanode3:
+    container_name: ndb3
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh ndbd
+    ports:
+            - "13308:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.5
+
+  datanode4:
+    container_name: ndb4
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh ndbd
+    ports:
+            - "13309:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.6
+
+  mysqld:
+    container_name: mysql1
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh mysqld
+    ports:
+      - "3306:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.10
+
+  mysqld2:
+    container_name: mysql2
+    image: "mysql/mysql-cluster"
+    entrypoint: /entrypoint.sh mysqld
+    ports:
+      - "3307:3306"
+    volumes:
+       - ./my.cnf:/etc/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=defaultpass
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.20
+networks:
+  cluster:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 192.168.0.0/16
+

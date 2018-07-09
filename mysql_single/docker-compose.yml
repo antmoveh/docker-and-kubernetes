@@ -1,0 +1,14 @@
+
+version: '3'
+services:
+  mysql_single:
+    hostname: mysql
+    image: mysql:5.7.18
+    ports:
+      - 3306:3306
+    volumes:
+      - $PWD/conf:/etc/mysql/mysql.conf.d
+      - /soft/mysql/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    container_name: mysql_single
