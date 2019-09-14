@@ -15,7 +15,7 @@ kubectl apply -f kubernetes-dashboard.yaml
 如此便可正常启动
 ```
 ---
-- 使用浏览器https://ip:30011即可访问，自签名证书允许访问即可
+- 使用https://ip:30011即可访问，自签名证书允许访问即可
 - dashboard管理员登录需要token,使用如下命令生成token
 
 ```
