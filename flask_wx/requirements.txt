@@ -1,5 +1,0 @@
-flask
-xmltodict
-requests
-flask_script
-gunicorn

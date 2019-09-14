@@ -1,0 +1,64 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    name: monitor-deployment
+  name: monitor
+  namespace: kube-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor
+  template:
+    metadata:
+      labels:
+        app: monitor
+    spec:
+      containers:
+      - image: prom/monitor:v2.3.2
+        name: monitor
+        command:
+        - "/bin/monitor"
+        args:
+        - "--config.file=/etc/monitor/monitor.yml"
+        - "--storage.tsdb.path=/monitor"
+        - "--storage.tsdb.retention=48h"
+        ports:
+        - containerPort: 9090
+          protocol: TCP
+        volumeMounts:
+        - mountPath: "/monitor"
+          name: data
+        - mountPath: "/etc/monitor"
+          name: config-volume
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      serviceAccountName: monitor
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          name: monitor-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: monitor
+  name: monitor
+  namespace: kube-monitor
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    targetPort: 9090
+    nodePort: 30003
+  selector:
+    app: monitor
